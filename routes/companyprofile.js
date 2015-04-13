@@ -1,6 +1,6 @@
 CompanyProfile = require('../models/CompanyModel');
 JobPosts = require('../models/JobPostsModel');
-
+var async = require('async');
 
 exports.getCompanyProfile = function(req, res){
 
@@ -87,11 +87,15 @@ exports.jobPosts = function(req,res){
 		console.log("job post added : " + jp);
 	});
 
-	CompanyProfile.findOne({'CompanyId':req.body.CompanyId},function(err,response){
+	CompanyProfile.findOne({'_id':req.user.companyId},function(err,response){
 		if (err)
 			throw err;
+        
+        console.log("In company profile findone " + JSON.stringify(response));
+        
 		response.JobPosts.push(h);
-		response.save(function(err){
+		
+        response.save(function(err){
 			if(err)
 				throw err;
 			console.log(response);
@@ -113,13 +117,21 @@ exports.getJobPosts = function(req,res){
 
 exports.getOwnJobPosts = function(req,res){
 	var posts = [];
-	CompanyModel.findOne({"_id" : 26}, function(err, response) {
+	
+	CompanyProfile.findOne({"_id" : 26}, function(err, response) {
 		if (err)
 			console.log(err);
+		
 		var postids = response.JobPosts;
+		
+		console.log("HHHHHHHHHHHH " + postids +  " " + JSON.stringify(response) );
+
 		if(postids!=null){
-		async.each(userFollowedArray,
+		
+		async.each(postids,
+
 				function(id,callback){
+				
 				JobPosts.findOne({"_id" : id}, function(err, response) {
 					if(response!=null){
 					posts.push(response);
@@ -127,7 +139,10 @@ exports.getOwnJobPosts = function(req,res){
 					}
 				});
 		},
+		
 		function(err){
+
+			console.log("POsts count " + posts.length);
 			console.log("Company own job posts are "+ posts);
 			res.json(posts);
 		}
@@ -137,9 +152,19 @@ exports.getOwnJobPosts = function(req,res){
 }
  
 exports.getProfile = function(req,res){
-	CompanyModel.findOne({'_id':26},function(err,response){
+	
+	console.log("REquestid " + JSON.stringify(req.user));
+	
+	CompanyProfile.findOne({'_id': req.user.companyId},function(err,response){
+		
+
 		if(err)
-			throw err;
+		{
+			console.log("Error: " + err);
+			res.redirect('/company#/companyHome');
+		}
+
+		console.log("company profile " + response);
 		res.json(response);
 	});
 };

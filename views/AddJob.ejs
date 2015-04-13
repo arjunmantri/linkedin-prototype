@@ -27,7 +27,7 @@
   
 
  </head>
-  <body ng-app="" id="main" ng-controller="companyController">
+  <body id="main" ng-controller="jobPostsController">
 
            <!--NAVIGATION CONTROLS-->
           <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
@@ -58,79 +58,71 @@
                       <div class="container" style="margin-bottom: 30px">                
                       <canvas id="canvas" width="5" height="5"></canvas>
                         <div class="container" id="infoContainer" style="margin-top:-8%">
-                         <center><legend style="font-style: 30px;">Company Details</legend></center>
+                         <center><legend style="font-style: 30px;">Job Details</legend></center>
                            <div>
                               Company Name:
-                                        <input type="text" ng-model="companyname" name="companyname" placeholder="" class="form-control" >
+                                        <input type="text" ng-model="companyname" name="companyname" placeholder="company" class="form-control" >
                                  
                               </div><br>
                                 <div>
-                              Address:
-                                        <input type="text" ng-model="address" name="address" placeholder="" class="form-control" >
+                              Job Title:
+                                        <input type="text" ng-model="jobtitle" name="jobtitle" placeholder="Job title" class="form-control" >
                                  
                               </div><br>
                            <div>
-                              Country:
-                                        <input type="text" ng-model="country" name="country" placeholder="" class="form-control" >
+                              Description:
+                               <textarea ng-model="description" name="description" placeholder="Description" class="form-control" ></textarea>
                                  
                               </div><br>
-                              <div>
-                              ZipCode:
-                                        <input type="text" ng-model="zipcode" name="zipcode" placeholder="" class="form-control" >
-                                 
-                              </div><br>
-                         
-                            <div>
-                             Overview:
-                                    <textarea ng-model="overview" name="overview" class="form-control" rows="5"></textarea>
                               
-                            </div><br>
+                                 <div>
+                              Skillset:
+                                     <textarea ng-model="skillset" name="skillset" placeholder="Skillset" class="form-control" ></textarea>
+                                 
+                              </div><br>
+                              
+                               
+                               <div>
+                              Location:
+                                        <input type="text" ng-model="location" name="location" placeholder="location" class="form-control" >
+                                 
+                              </div><br>
+                       
                                 <span></span>
                                   <div>
-                              Url:
-                                        <input type="text" name="url" ng-model="url" placeholder="" class="form-control" >
+                              Expiry date:
+                                        <input type="date" name="exdate" ng-model="exdate" placeholder="" class="form-control" >
                                  
                               </div><br>
-                              <div>
-                              Founded: 
-                                       <input type="date" name="date" ng-model="founded" placeholder="" class="form-control">
-
-                             </div><br>                              
+                                                           
                           
                         </div>
                         </div>
                 
                             <div class="row" style="width:60%; float:right">
-                              <input type="button" ng-click="saveInfo()" class="btn btn-primary" value="Save Changes" style="margin-left:-15px">
+                              <input type="button" ng-click="saveJobPosts()" class="btn btn-primary" value="Post Job" style="margin-left:-15px">
                                 <input type="reset" class="btn btn-default" value="Cancel">
 
                             </div>
                   </form>
-                  
-        <script>
-        function companyController($scope,$http,$location) {
+                   
+      
+      <script>
+         
+          function jobPostsController($scope,$http,$location) {
            
-          
-		  	$scope.image=function() {
-  				var canvas = document.getElementById("canvas");
-				var dataURL = canvas.toDataURL();
-				console.log("here we are");
-				console.log(dataURL);
-  			};
-               
-               $scope.saveInfo = function() {
-               console.log("In function");
-                  $http({
+               $scope.saveJobPosts = function() {
+
+                   $http({
                         method: 'POST',
-                        url: '/companyprofile',
+                        url: '/company/jobs',
                         data: { 
-                                "CompanyName" :$scope.companyname,
-                                "Address":$scope.address,
-                                "Country":$scope.country,
-                                "ZipCode":$scope.zipcode,
-                                "Overview":$scope.overview,
-                                "Url":$scope.url,
-                                "Founded":$scope.founded                                            
+                                "CompanyName" : $scope.companyname,
+                                "JobTitle"  :   $scope.jobtitle,
+                                "JobDescription"   :   $scope.description,
+                                "Skillset"   :   $scope.skillset,
+                                "JobLocation"  :   $scope.overview,
+                                "Expirydate"   :   $scope.exdate                                            
                                 
                             }
                         
@@ -153,21 +145,9 @@
                     });
                 };
 
-                $scope.getCompanyInfo = function(){
-
-                    $http.get('/companyprofile').success(function(response){
-
-                        console.log("Company retrieved " + JSON.stringify(response));
-
-
-                    });
                 }
 
- 
-        }//controller ends here
-
-
-
-        </script> 
+        
+      </script>
   </body>
 </html>

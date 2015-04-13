@@ -4,7 +4,7 @@ var authHandleCompany = require('../config/passportAuthCompany');
 var user = require('../routes/userprofile.js');
 var company = require('../routes/companyprofile.js');
 var routes = require('../routes/index.js');
-
+var memcache = require('../routes/memcache.js');
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -107,7 +107,7 @@ router.get('/login/company', function(req, res){
 });
 */
 
-router.post('/login/company', passport.authenticate('local-company-login', { successRedirect : '/companyprofile',
+router.post('/login/company', passport.authenticate('local-company-login', { successRedirect : '/company#/companyHome',
                                                                            failureRedirect : '/',
                                                                            failureFlash : true
    }));
@@ -144,6 +144,7 @@ router.get('/userProfile',user.getProfile);
 router.post('/userProfile',user.postProfile);
 
 
+
 /*company dashboard routes*/
 
 
@@ -169,7 +170,13 @@ router.post('/companyprofile', company.updateCompanyInfo);
 
 
 //save jobPosts in the company
-//router.post('/postJob',company.jobPosts);
+router.post('/company/jobs',company.jobPosts);
+
+router.get('/company/jobs', function(req, res, next){
+    
+    res.render('AddJob', {'message' : req.user});
+
+});
 
 //router.get('/getJob',company.getJobPosts);
 router.get('/getJobs/:key',company.getJobPosts);

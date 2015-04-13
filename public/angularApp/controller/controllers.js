@@ -1,4 +1,4 @@
-﻿
+
 app.controller('UserController', function ($scope,$rootScope, $http, userService) {
 
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
@@ -72,8 +72,7 @@ app.controller('ProfileController', function ($scope,$http, userService){
 	
 	$scope.editInfo = function(){
 		console.log("In editprofile")
-		//$http.get("/editProfile");
-	window.location = '/editProfile';
+        window.location = '/editProfile';
 	}
 	
 });
@@ -98,7 +97,7 @@ app.controller('CompanyDashboardController',function($scope,$http){
 	)}
 })
 
-app.controller('CompanyVProfileController',function($scope,$http){
+app.controller('CompanyProfileController',function($scope,$http){
 	init();
 	
 	function init(){
@@ -107,11 +106,15 @@ app.controller('CompanyVProfileController',function($scope,$http){
 		})
 	}
 	
-	function editInfo(){
-		console.log("In Company editprofile")
-		//$http.get("/editProfile");
-	window.location = '/editCompanyProfile';
+	$scope.editInfo = function(){
+		console.log("In Company editprofile");
+	   window.location = '/editCompanyProfile';
 	}
+    
+    $scope.postJobs = function(){
+        
+        window.location = '/company/jobs';
+    }
 })
 app.controller('NavbarController', function ($scope, $rootScope, $location) {
     $scope.getClass = function (path) {
