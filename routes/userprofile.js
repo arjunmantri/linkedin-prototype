@@ -99,21 +99,22 @@ exports.getJobPosts = function(req,res){
 		if (err)
 			console.log(err);
 		var companyFollowedArray = response.CompanyFollowed;
-		async.each(companyFollowedArray,
+		if(companyFollowedArray!=null){
+			async.each(companyFollowedArray,
 				function(id,callback){
 					CompanyModel.findOne({"CompanyId" : id}, function(err, resp) {
-						
-						if(resp != null)
-						{
-							postArray.push(resp.JobPosts);
+						if(resp!=null){
+							if(resp.JobPosts!=null){
+								postArray.push(resp.JobPosts);
 							callback();
+							}
 						}
-
 					});				
 				},
 				function(err){
 					var str = postArray.toString();
 					var arr =str.split(',')
+					if(arr!=null){
 					async.each(arr,
 							function(pid,back){
 								JobPosts.findOne({"_id":pid},'CompanyName CompanyId JobName JobDescription',function(err,response){
@@ -123,7 +124,11 @@ exports.getJobPosts = function(req,res){
 					},function(err){
 						res.json(posts);
 						
-					});	
+					});
+					}
 				});
+			  }else{
+				 
+			  }
 			});
 };
