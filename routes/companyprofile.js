@@ -168,3 +168,30 @@ exports.getProfile = function(req,res){
 		res.json(response);
 	});
 };
+
+exports.updateStatus = function(req, res){
+
+    console.log("New status "  + req.body.status);
+    
+    CompanyProfile.findOneAndUpdate({_id: req.user.companyId}, {$push: {status: req.body.status}}, {safe: true, upsert: true},
+    
+    function(err, model) {
+        if(err)
+            console.log(err);
+        res.redirect('/company#/companyHome');
+    }
+);
+        
+}
+
+exports.getStatus = function(req, res){
+    
+    CompanyProfile.find({_id: req.user.companyId}, function(err, response){
+        
+        if(err)
+            console.log(err);
+        
+        console.log("Status response: " + response);
+        res.json(response.status);
+    });
+}

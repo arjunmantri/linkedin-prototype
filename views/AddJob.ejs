@@ -26,54 +26,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     
       
-      <script>
-         
-          function jobPostsController($scope,$http,$location) {
-           
-              console.log("Job posts controller");
-              
-               $scope.saveJobPosts = function() {
-
-                   
-               console.log("Saving job");
-              
-                   
-                   $http({
-                        method: 'POST',
-                        url: '/company/jobs',
-                        data: { 
-                                "CompanyName" : $scope.companyname,
-                                "JobTitle"  :   $scope.jobtitle,
-                                "JobDescription"   :   $scope.description,
-                                "Skillset"   :   $scope.skillset,
-                                "JobLocation"  :   $scope.overview,
-                                "Expirydate"   :   $scope.exdate                                            
-                                
-                            }
-                        
-                     }).success(function(response){
-                       
-                        alert(JSON.stringify(response));
-                        
-                        if(response.save == "Success")
-                        {
-                            
-                           window.location = '/company#/companyHome';
-                        }
-                        else
-                        {
-                          window.location = '/company#/companyHome';
-                        }
-                    })
-                     .error(function(error){
-                        alert("error: " + error);
-                    });
-                };
-
-                }
-
-      </script>
-      
 
  </head>
   <body id="main" ng-controller="jobPostsController">
@@ -102,6 +54,9 @@
             </div>
         </nav>
 
+             <div class="container" style="margin-bottom: 2%"></div>
+
+      
 
             <form name="myForm" method="post" action="/company/jobs">
                       <div class="container" style="margin-bottom: 30px">                

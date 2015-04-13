@@ -178,6 +178,10 @@ router.get('/company/jobs', function(req, res, next){
 
 });
 
+router.post('/company/status', company.updateStatus);
+
+router.get('/company/status', company.getStatus);
+
 //router.get('/getJob',company.getJobPosts);
 router.get('/getJobs/:key',company.getJobPosts);
 

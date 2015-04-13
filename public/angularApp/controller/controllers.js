@@ -99,8 +99,15 @@ app.controller('CompanyDashboardController',function($scope,$http){
             
             console.log("POSTS " + JSON.stringify(res));
 			$scope.posts = res;
-		}
-	)}
+		})
+        
+        $http.get('/company/status').success(function(res){
+            
+            console.log("POSTS " + JSON.stringify(res));
+
+            $scope.status = res.status;
+        })
+    }
 });
 
 app.controller('CompanyProfileController',function($scope,$http){

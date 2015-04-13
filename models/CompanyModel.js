@@ -13,7 +13,8 @@ var company = new Schema({
 	Url:String,
 	Founded:String,
 	Numoffollowers: Number,
-	JobPosts:[String]
+	JobPosts:[String],
+    Status: []
 });
 
 
