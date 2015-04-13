@@ -1,0 +1,27 @@
+<div class="home views">
+    <div class="container">
+    	<div>
+    		<header>
+    			<h3>Job Posts</h3>
+    		</header>
+    		<br />
+    		<div>
+    			<div class="posts" data-ng-repeat="post in posts track by post._id">
+    			{{post.CompanyName}}
+    			<br />
+    			{{post.JobName}}
+    			<br />
+    			{{post.JobDescription}}
+    			<br />
+    			Requirements: {{post.SkillSet}}
+    			<br />
+    			Location: {{post.JobLocation}}
+    			<br />
+    			Posting Date: {{post.PostDate}}
+    			<br />
+    			Application open untill: {{post.ExpiredDate}}
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>

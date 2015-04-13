@@ -146,8 +146,17 @@ router.post('/userProfile',user.postProfile);
 
 /*company dashboard routes*/
 
+
+
+//Company dashboard Api
+router.get('/company',function(req,res){
+	
+	res.render('CompanyProfileManager');
+})
 //Company profile information and job posting details of the company
-router.get('/companyprofile', isLoggedIn, company.getCompanyProfile);
+router.get('/getOwnJobPosts', company.getOwnJobPosts);
+
+router.get('/getCompanyProfile',isLoggedIn,company.getProfile);
 
 router.get('/editCompanyProfile', isLoggedIn, function(req, res){
     
@@ -163,7 +172,13 @@ router.post('/companyprofile', company.updateCompanyInfo);
 //router.post('/postJob',company.jobPosts);
 
 //router.get('/getJob',company.getJobPosts);
+router.get('/getJobs/:key',company.getJobPosts);
 
+router.get('/getMemcache/:key',memcache.getFromMemcache);
+
+//router.get('/getUsers/:key',user.getUsers);
+
+//router.get('/getCompanies/:key',company.getCompanies);
 
 /*=========== HELPER FUNCTIONS ===========================*/
 

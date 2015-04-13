@@ -1,0 +1,82 @@
+
+              <div class="container">
+            <div class = "row">
+                <div class = "col-sm-6">
+            
+                        <div class="panel panel-info" id="panel">
+                        
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8">
+                                    <h2><p class="text-uppercase"><strong>{{profile.CompanyName + ' ' + profile.LastName}}</strong></p></h2>
+                                    <p>{{status}}</p>
+                                    <div class="row">
+                                        <div class="col-xs-6"><h4><small>{{profile.Address}}</small></h4></div>  
+                                        <div class="col-xs-6"><h4><small>{{profile.Country}}</small></h4></div>
+                                    </div>
+                                    <div class="row">
+                                    	Overview:
+                                    	<br />
+                                        <div class="col-xs-6"><h4><small> {{profile.Overview}}</small></h4></div> 
+                                         <div class="col-xs-6"><h4><small>Degree: {{profile.Url}}</small></h4></div> 
+                                        <div class="col-xs-6"><h4><small>Major: {{profile.Founded}}</small></h4></div> 
+                                       <div class>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <img src="../images/gravatar.jpg" alt="" class="center-block img-circle img-responsive">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+          
+            <div class="container" id="content">
+                <div class="row" id="innercontent">
+                        <p class="lead" >Overview</p>
+                        {{profile.Overview}}
+                </div>
+            </div>
+            
+            <div class="container" id="seperator"></div>
+          
+            <div class="container" id="content">
+                <div class="row" id="innercontent">
+                    <p class="lead" >Experience</p>
+                    Url: {{profile.Url}}
+                </div>
+            </div>
+          
+              <div class="container" id="seperator"></div>
+          
+            <div class="container" id="content">
+                <div class="row" id="innercontent">
+                    <p class="lead" >Founded</p>
+                    {{profile.Founded}}
+                </div>
+            </div>
+          
+          <div class="container" id="seperator"></div>
+          
+            <div class="container" id="content">
+                <div class="row" id="innercontent">
+                    <p class="lead" >Number of Followers</p>
+                       {{profile.Numoffollowers}}
+                </div>
+            </div>
+ 
+            <div class="container" id="seperator"></div>
+          
+            <div class="container" id="seperator"></div>
+            <input type="button" ng-click="editInfo()" class="btn btn-primary" value="Edit Profile">
+
+      </div><!-- top container-->  
+        
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </body>

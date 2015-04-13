@@ -104,31 +104,42 @@ exports.jobPosts = function(req,res){
 
 //Get function for the Job Search:-
 exports.getJobPosts = function(req,res){
-
-	jp = new JobPosts;
-	var date = Date.now();
-	var h = date.toString();
-	console.log(h);
-	jp._id = h;
-	jp.JobName = req.body.JobName;
-	jp.JobDescription = req.body.JobDescription;
-	jp.PostDate = new Date;
-	jp.ExpiryDate = new Date(req.body.ExpiryDate);
-	jp.JobLocation = req.body.JobLocation;
-	jp.SkillSet = req.body.SkillSet;
-	jp.save(function(err){
-		if(err)
-			throw err;
-		console.log("job post added : " + jp);
-	});
-	
-};
-
-//Get function for the Job Search:-
-exports.getJobPosts = function(req,res){
 	JobPosts.find({'SkillSet':req.params.key},function(err,response){
 		if(err)
 			throw err;
 		res.json(response);
 	})
+};
+
+exports.getOwnJobPosts = function(req,res){
+	var posts = [];
+	CompanyModel.findOne({"_id" : 26}, function(err, response) {
+		if (err)
+			console.log(err);
+		var postids = response.JobPosts;
+		if(postids!=null){
+		async.each(userFollowedArray,
+				function(id,callback){
+				JobPosts.findOne({"_id" : id}, function(err, response) {
+					if(response!=null){
+					posts.push(response);
+					callback();
+					}
+				});
+		},
+		function(err){
+			console.log("Company own job posts are "+ posts);
+			res.json(posts);
+		}
+	);
+	}
+	});
+}
+ 
+exports.getProfile = function(req,res){
+	CompanyModel.findOne({'_id':26},function(err,response){
+		if(err)
+			throw err;
+		res.json(response);
+	});
 };

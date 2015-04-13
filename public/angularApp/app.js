@@ -26,10 +26,20 @@ app.config(function ($routeProvider) {
                 controller: 'CompanyController',
                 templateUrl: '/view/companyEditProfile.ejs'
             })
-         .when('/companyViewProfile',
+        .when('/companyViewProfile',
         		 {
         	 	   controller: 'CompanyController',
         	 	   templateUrl: '/views/companyViewProfile.ejs'
         		 })
+        .when('/companyHome',
+            {
+        	 	controller: 'CompanyDashboardController',
+        	 	templateUrl: '/views/companyDashboard.ejs'
+             })
+        .when('/companyProfile',
+        	{
+        		controller:'CompanyProfileController',
+        		templateUrl: '/views/companyProfile.ejs'
+        	})	
         .otherwise({ redirectTo: '/home' });
 });

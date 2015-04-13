@@ -78,40 +78,6 @@ app.controller('ProfileController', function ($scope,$http, userService){
 	
 });
 
-//This controller retrieves data from the customersService and associates it with the $scope
-//The $scope is bound to the order view
-app.controller('CustomerOrdersController', function ($scope, $routeParams, customersService) {
-    $scope.customer = {};
-    $scope.ordersTotal = 0.00;
-
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-    init();
-
-    function init() {
-        //Grab customerID off of the route        
-        var customerID = ($routeParams.customerID) ? parseInt($routeParams.customerID) : 0;
-        if (customerID > 0) {
-            $scope.customer = customersService.getCustomer(customerID);
-        }
-    }
-
-});
-
-//This controller retrieves data from the customersService and associates it with the $scope
-//The $scope is bound to the orders view
-app.controller('OrdersController', function ($scope, customersService) {
-    $scope.customers = [];
-
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-    init();
-
-    function init() {
-        $scope.customers = customersService.getCustomers();
-    }
-});
-
 app.controller('NavbarController', function ($scope, $location) {
     $scope.getClass = function (path) {
         if ($location.path().substr(0, path.length) == path) {
@@ -122,40 +88,53 @@ app.controller('NavbarController', function ($scope, $location) {
     }
 });
 
-//This controller is a child controller that will inherit functionality from a parent
-//It's used to track the orderby parameter and ordersTotal for a customer. Put it here rather than duplicating 
-//setOrder and orderby across multiple controllers.
-app.controller('OrderChildController', function ($scope) {
-    $scope.orderby = 'product';
-    $scope.reverse = false;
-    $scope.ordersTotal = 0.00;
+app.controller('CompanyDashboardController',function($scope,$http){
+	init();
+	
+	function init(){
+		$http.get('/getOwnJobPosts').success(function(res){
+			$scope.posts = res;
+		}
+	)}
+})
 
-    init();
-
-    function init() {
-        //Calculate grand total
-        //Handled at this level so we don't duplicate it across parent controllers
-        if ($scope.customer && $scope.customer.orders) {
-            var total = 0.00;
-            for (var i = 0; i < $scope.customer.orders.length; i++) {
-                var order = $scope.customer.orders[i];
-                total += order.orderTotal;
-            }
-            $scope.ordersTotal = total;
+app.controller('CompanyVProfileController',function($scope,$http){
+	init();
+	
+	function init(){
+		$http.get('/getCompanyProfile').success(function(res){
+			$scope.profile=res;
+		})
+	}
+	
+	function editInfo(){
+		console.log("In Company editprofile")
+		//$http.get("/editProfile");
+	window.location = '/editCompanyProfile';
+	}
+})
+app.controller('NavbarController', function ($scope, $rootScope, $location) {
+    $scope.getClass = function (path) {
+        if ($location.path().substr(0, path.length) == path) {
+            return true;
+        } else {
+            return false;
         }
     }
-
-    $scope.setOrder = function (orderby) {
-        if (orderby === $scope.orderby)
-        {
-            $scope.reverse = !$scope.reverse;
-        }
-        $scope.orderby = orderby;
-    };
-
+    $rootScope.key = $scope.key;
+    console.log("Key in navbar is "+ $rootScope.key);
 });
 
-
+app.controller('SearchController', function ($scope, $http,$rootScope){
+	init();
+	function init(){
+		console.log("Root scope key is "+$rootScope.key)
+	$http.get('/getJobs/?param1='+"Java").success(function(response){
+		console.log("In search controller " + response);
+		$scope.posts = response;
+	})
+	}
+})
 
 app.controller('userRegController', ['$scope', userRegistration])
 
