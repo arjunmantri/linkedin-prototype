@@ -7,7 +7,7 @@ var JobPosts = require('../models/JobPostsModel');
 
 exports.getProfile = function(req,res){
 	
-	UserModel.findOne({"UserId":1},function(err,response){
+	UserModel.findOne({"UserId": req.user.userId},function(err,response){
 		if(err)
 			console.log(err);
 		console.log("response is "+ response);
@@ -22,7 +22,7 @@ exports.viewProfile = function(req,res){
 };
 exports.postProfile = function(req,res){
 	um = new UserModel;
-	um.UserId = 001//req.body.UserId;
+	um.UserId = req.user.userId//req.body.UserId;
 	um.FirstName = "Yash"//req.body.FirstName;
 	um.LastName = "Oswal"//req.body.LastName;
 	um.Address = req.body.Address;
@@ -52,7 +52,7 @@ exports.postProfile = function(req,res){
 
 exports.getUserFollowing = function(req,res){
 	var users = [];
-	UserModel.findOne({"UserId" : 1}, function(err, response) {
+	UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
 		if (err)
 			console.log(err);
 		var userFollowedArray = response.UserFollowed;
@@ -73,7 +73,7 @@ exports.getUserFollowing = function(req,res){
 exports.getCompanyFollowing = function(req,res){
 	
 	var companies = [];
-	UserModel.findOne({"UserId" : 1}, function(err, response) {
+	UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
 		if (err)
 			console.log(err);
 		var companyFollowedArray = response.CompanyFollowed;
@@ -95,7 +95,7 @@ exports.getJobPosts = function(req,res){
 	var posts = [];
 	var postlist = [];
 	var postArray = [];
-	UserModel.findOne({"UserId" : 1}, function(err, response) {
+	UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
 		if (err)
 			console.log(err);
 		var companyFollowedArray = response.CompanyFollowed;

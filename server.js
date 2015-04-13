@@ -14,10 +14,53 @@ var http = require('http');
 var fs = require('fs');
 var AWS = require('aws-sdk');
 
-//Get a connection to mysql
-var sqldb = require('./config/sqldb');
-//var connection  = sqldb.getConnection();
 
+//INITIALIZE MYSQL DB
+/*
+var mySQL = require('./config/mySqlQuery');
+
+mySQL.useDatabase(function(err, flag){
+    
+    if(err)
+    {
+        Console.log('App error ' + err);
+    }
+    if(flag)
+    {
+       Console.log('Db phase1');
+        
+        
+    }
+
+});
+
+mySQL.createTable1(function(err, flag)
+        {
+           if(err)
+           {
+               Console.log('App error ' + err);
+           }
+            if(flag)
+            {
+                    Console.log('Db phase2');                 
+            }
+            
+});
+
+
+mySQL.createTable2(function(err, flag){
+                        
+        if(err)
+        {
+            Console.log('App error ' + err);
+        }
+        if(flag)
+        {
+             Console.log('Db phase3');
+
+        }
+});
+*/
 
 var app = express();
 
