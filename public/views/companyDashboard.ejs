@@ -1,3 +1,5 @@
+
+
 <div class="home views">
     <div class="container">
     	<div>
@@ -5,22 +7,41 @@
     			<h3>Job Posts</h3>
     		</header>
     		<br />
-    		<div>
-    			<div class="posts" data-ng-repeat="post in posts track by post._id">
-    			{{post.CompanyName}}
-    			<br />
-    			{{post.JobName}}
-    			<br />
-    			{{post.JobDescription}}
-    			<br />
-    			Requirements: {{post.SkillSet}}
-    			<br />
-    			Location: {{post.JobLocation}}
-    			<br />
-    			Posting Date: {{post.PostDate}}
-    			<br />
-    			Application open untill: {{post.ExpiredDate}}
-    			</div>
+        
+            
+             <div class="container"> 
+                
+    		
+    			<div class="posts" data-ng-repeat="post in posts track by post._id" id="postsDecorator">
+    
+                    <p id="postsHeadings">{{post.JobName}}</p>
+                    
+                    
+                    <p id="jobpostelement">Date</p>
+                    <p id="jobpostcontent">{{post.PostDate}}</p>
+                    
+                    <p id="jobpostelement">Location</p>
+                    <p id="jobpostcontent">{{post.JobLocation}}</p>
+                    
+                    
+                    <p id="jobpostelement">Description</p>
+                    <p id="jobpostcontent">{{post.JobDescription}}</p>
+                    
+                    
+                    <p id="jobpostelement">Requirements</p>
+                    <p id="jobpostcontent">{{post.SkillSet}}</p>
+                                 
+                    <p id="jobpostelement">Applications accepted untill</p>
+                    <p id="jobpostcontent">{{post.ExpiryDate}}</p>
+                    
+
+                </div>
+                                     <div class="container" style="margin:bottom: 5em"></div>
+
+                 
+            </div>
+                    
+                </div>
     		</div>
     	</div>
     </div>

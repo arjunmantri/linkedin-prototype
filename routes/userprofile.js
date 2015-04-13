@@ -17,7 +17,7 @@ exports.getProfile = function(req,res){
 
 exports.viewProfile = function(req,res){
 	
-    res.render('editProfile', { message : req.user });
+    res.render('editprofile', { message : req.user });
 
 };
 exports.postProfile = function(req,res){

@@ -75,19 +75,20 @@ exports.jobPosts = function(req,res){
 	var h = date.toString();
 	console.log(h);
 	jp._id = h;
-	jp.JobName = req.body.JobName;
+	jp.JobName = req.body.JobTitle;
 	jp.JobDescription = req.body.JobDescription;
 	jp.PostDate = new Date;
 	jp.ExpiryDate = new Date(req.body.ExpiryDate);
 	jp.JobLocation = req.body.JobLocation;
 	jp.SkillSet = req.body.SkillSet;
-	jp.save(function(err){
+	
+    jp.save(function(err){
 		if(err)
 			throw err;
 		console.log("job post added : " + jp);
 	});
 
-	CompanyProfile.findOne({'_id':req.user.companyId},function(err,response){
+	CompanyProfile.findOne({'_id': req.user.companyId},function(err,response){
 		if (err)
 			throw err;
         
@@ -102,7 +103,7 @@ exports.jobPosts = function(req,res){
 		});
 		
 	});
-	res.end();	
+	res.redirect('/company#/companyHome');	
 };
 
 
@@ -118,14 +119,12 @@ exports.getJobPosts = function(req,res){
 exports.getOwnJobPosts = function(req,res){
 	var posts = [];
 	
-	CompanyProfile.findOne({"_id" : 26}, function(err, response) {
+	CompanyProfile.findOne({"_id" : req.user.companyId}, function(err, response) {
 		if (err)
 			console.log(err);
 		
 		var postids = response.JobPosts;
 		
-		console.log("HHHHHHHHHHHH " + postids +  " " + JSON.stringify(response) );
-
 		if(postids!=null){
 		
 		async.each(postids,
@@ -135,8 +134,9 @@ exports.getOwnJobPosts = function(req,res){
 				JobPosts.findOne({"_id" : id}, function(err, response) {
 					if(response!=null){
 					posts.push(response);
-					callback();
+					
 					}
+                    callback();
 				});
 		},
 		

@@ -88,14 +88,20 @@ app.controller('NavbarController', function ($scope, $location) {
 });
 
 app.controller('CompanyDashboardController',function($scope,$http){
-	init();
+	
+    console.log("CompanyDashboardController");
+    
+    init();
 	
 	function init(){
-		$http.get('/getOwnJobPosts').success(function(res){
+	
+        $http.get('/getOwnJobPosts').success(function(res){
+            
+            console.log("POSTS " + JSON.stringify(res));
 			$scope.posts = res;
 		}
 	)}
-})
+});
 
 app.controller('CompanyProfileController',function($scope,$http){
 	init();
@@ -116,6 +122,7 @@ app.controller('CompanyProfileController',function($scope,$http){
         window.location = '/company/jobs';
     }
 })
+
 app.controller('NavbarController', function ($scope, $rootScope, $location) {
     $scope.getClass = function (path) {
         if ($location.path().substr(0, path.length) == path) {

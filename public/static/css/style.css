@@ -53,6 +53,37 @@ body { padding-top: 70px; }
 }
 
 
+#jobpostelement
+{
+    font-weight: 700;
+    font-size: small;
+    margin-bottom: 1em;
+
+}
+
+
+#jobpostcontent
+{
+     display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+        margin-left: -1%;
+    background-color: whitesmoke;
+    margin-top: -2%;
+
+
+}
+
+
 #buttonlinks{
     font-size:15px; 
     float:left; 
