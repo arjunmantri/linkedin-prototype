@@ -21,32 +21,50 @@ exports.viewProfile = function(req,res){
 
 };
 exports.postProfile = function(req,response){
+	//var update
 	
    // var um = new UserModel;
+	console.log("*************** user id "+req.user.userId);
+    UserModel.findOne({"UserId": req.user.userId}, function(err,um){
+		if(err)
+			console.log(err);
+		console.log("response is "+ response);
+		um.FirstName =req.body.FirstName;
+	    um.LastName =req.body.LastName;//req.body.LastName;
+		um.Address = req.body.Address;
+		um.Country = req.body.Country;
+		um.ZipCode = req.body.ZipCode;
+		um.Bio = req.body.Bio;
+		um.Company.Name = req.body.CompanyName;
+		um.Company.Title = req.body.CompanyTitle;
+		um.Company.StartDate = req.body.CompanyStartDate;
+		um.Company.EndDate = req.body.CompanyEndDate;
+		um.Company.Description = req.body.CompanyDescription;
+		um.Education.School = req.body.EducationSchool;
+		um.Education.Degree = req.body.EducationDegree;
+		um.Education.Field = req.body.EducationField;
+		um.Education.Level = req.body.Level;
+		um.Education.Grade = req.body.Grade;
+		um.Education.StartDate = req.body.EducationStartDate;
+		um.Education.EndDate = req.body.EducationEndDate;
+		um.save(function(err){
+			if(err)
+				throw err;
+			console.log("user profile added : " + um);
+		});
+		//res.json(response);
+	});
+    console.log("********************************** in post profile");
+    
+    
+	 
 	
-    
-    um.LastName =req.body.LastName;//req.body.LastName;
-	um.Address = req.body.Address;
-	um.Country = req.body.Country;
-	um.ZipCode = req.body.ZipCode;
-	um.Bio = req.body.Bio;
-	um.Company.Name = req.body.CompanyName;
-	um.Company.Title = req.body.CompanyTitle;
-	um.Company.StartDate = req.body.CompanyStartDate;
-	um.Company.EndDate = req.body.CompanyEndDate;
-	um.Company.Description = req.body.CompanyDescription;
-	um.Education.School = req.body.EducationSchool;
-	um.Education.Degree = req.body.EducationDegree;
-	um.Education.Field = req.body.EducationField;
-	um.Education.Level = req.body.Level;
-	um.Education.Grade = req.body.Grade;
-	um.Education.StartDate = req.body.EducationStartDate;
-	um.Education.EndDate = req.body.EducationEndDate;
-    
- 
-    
-    
-    
+	/*um.save(function(err){
+		if(err)
+			throw err;
+		console.log("user profile added : " + um);
+	});*/		
+	response.end("Profile Saved!!");
 		
 };
 
