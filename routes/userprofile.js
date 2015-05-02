@@ -20,11 +20,12 @@ exports.viewProfile = function(req,res){
     res.render('editprofile', { message : req.user });
 
 };
-exports.postProfile = function(req,res){
-	um = new UserModel;
-	um.UserId = req.user.userId//req.body.UserId;
-	um.FirstName = "Yash"//req.body.FirstName;
-	um.LastName = "Oswal"//req.body.LastName;
+exports.postProfile = function(req,response){
+	
+   // var um = new UserModel;
+	
+    
+    um.LastName =req.body.LastName;//req.body.LastName;
 	um.Address = req.body.Address;
 	um.Country = req.body.Country;
 	um.ZipCode = req.body.ZipCode;
@@ -41,13 +42,12 @@ exports.postProfile = function(req,res){
 	um.Education.Grade = req.body.Grade;
 	um.Education.StartDate = req.body.EducationStartDate;
 	um.Education.EndDate = req.body.EducationEndDate;
-	
-	um.save(function(err){
-		if(err)
-			throw err;
-		console.log("user profile added : " + um);
-	});		
-	res.end("Profile Saved!!");
+    
+ 
+    
+    
+    
+		
 };
 
 exports.getUserFollowing = function(req,res){

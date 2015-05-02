@@ -215,6 +215,8 @@
                         method: 'POST',
                         url: '/userProfile',
                         data: { 
+                                "FirstName" : $scope.firstname,
+                                "LastName": $scope.lastname,
                                 "Address":$scope.address,
                                 "Country":$scope.country,
                                 "ZipCode":$scope.zipcode,
