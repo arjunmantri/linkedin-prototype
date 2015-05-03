@@ -138,40 +138,33 @@ app.controller('NavbarController', function ($scope, $location,searchService) {
 	
 	$scope.search=function(){
 		console.log("Search key is " +$scope.searchKey);
-		searchService.setSearchKey($scope.searchKey);
+		$location.path('/search/'+$scope.searchKey);
 	}
-    $scope.getClass = function (path) {
-        if ($location.path().substr(0, path.length) == path) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 });
 
 
-app.controller('SearchController', function ($scope, $http,searchService){
+app.controller('SearchController', function ($scope, $http,$routeParams,searchService){
 	init();
 	function init(){
-		//searchService.setUserSearch($scope.searchkey);
-//		console.log("Root scope key is "+$scope.searchkey)
-	//$http.get('/getJobs/?param1='+"Java").success(function(response){
-		//console.log("In search controller " + response);
-		//$scope.posts = response;
-		//$scope.results = searchService.user();
-	}
-	$scope.search=function(){
-		console.log("Search key is " +$scope.searchKey);
-		$http.get("/userSearch/"+$scope.searchKey).success(function(response){
-			alert("success");
+		console.log("Search key is " +$routeParams.searchKey);
+		$http.get("/userSearch/"+$routeParams.searchKey).success(function(response){
+			//alert("success");
 			$scope.results=response;	
 		})
-		
-	$scope.follow=function(){
-			console.log($scope.email)
-			//$http.put("/followUser",$scope.user.)
-		}
 	}
+	//$scope.search=function(){
+		
+		
+	$scope.follow=function(id){
+			//$scope.results=""
+			
+			$http.put("/followUser",({"Id":id})
+			).success(function(response){
+				alert("success")
+				//scope.results=""
+			});
+		}
+	
 })
 
 app.controller('userRegController', ['$scope', userRegistration])

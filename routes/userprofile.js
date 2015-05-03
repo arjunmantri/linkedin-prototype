@@ -159,3 +159,21 @@ exports.getUsers=function(req,res){
 	});
 	
 }
+
+exports.follow=function(req,res){
+		UserModel.findOne({"UserId":req.user.userId},function(err,response){
+			//console.log("************************ +" +req.body.EmailId);
+			var array = response.UserFollowed
+			//var id = Number(req.body.EmailId)
+			array.push(req.body.Id);
+			response.UserFollowed = array;
+			response.save(function(err){
+				if(err)
+					throw err;
+				console.log("user followed updated : " + response);
+			});
+			res.json("success");
+	
+		})
+	
+}

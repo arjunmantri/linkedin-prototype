@@ -201,6 +201,8 @@ router.post('/jobRecommendation',job.postJobRecommendation);
 
 //router.get('/getCompanies/:key',company.getCompanies);
 
+router.put('/followUser',user.follow);
+
 /*=========== HELPER FUNCTIONS ===========================*/
 
 

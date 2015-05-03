@@ -41,7 +41,7 @@ app.config(function ($routeProvider) {
         		controller:'CompanyProfileController',
         		templateUrl: '/views/companyProfile.ejs'
         	})
-        .when('/search',
+        .when('/search/:searchKey',
         	{
         		controller:'SearchController',
         		templateUrl:'/views/search.ejs'
