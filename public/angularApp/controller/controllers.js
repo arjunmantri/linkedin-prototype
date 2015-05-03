@@ -55,9 +55,25 @@ app.controller('UserController', function ($scope,$rootScope, $http, userService
         });
     };
 
-    $scope.deleteCustomer = function (id) {
-        customersService.deleteCustomer(id);
-    };
+    
+    $scope.updateMyStatus = function(){
+    
+        if($scope.status.length != 0)
+        {
+            $http.post('/status', ({"status" : $scope.status})).success(function(response){
+            
+                console.log("Status post req complete " + response);
+            
+        }).error(function(error){
+        
+                console.log("Status post req err " + error);
+        })
+        }//if
+        
+        
+    }//updateMyStatus
+    
+    
 });
 
 app.controller('ProfileController', function ($scope,$http, userService){

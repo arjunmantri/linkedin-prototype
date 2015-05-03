@@ -3,17 +3,35 @@
     	 <div class="row">
             <div class="col-md-8">
          
+                
+                
+        <div class="container" id="postsDecorator">
+             <div class="row">
+                <div class="col-md-8">
+                    <textarea placeholder="Whats up?" id="statusbox" ng-model="status" maxlength="150"></textarea>
+                </div>
+                 <div class="col-md-4">
+                    <input type="button" ng-click="updateMyStatus()" class="btn btn-lg btn-info" value="Post"></button>
+                 </div>
+            </div>
+        </div>        
+                
+         <div class="container" style="margin-top:3%"></div>       
+                
+                
         <div class="container" id="postsDecorator">
                 <p id="postsHeadings">Posts</p>
                 <br />
+              
                 <div>
                     <div class="panel" data-ng-repeat="user in users track by user.UserId" id="postscontent">
                         <p id="poststext">{{user.FirstName + ' ' + user.LastName}}</p>
                         <p id="poststext">{{user.Posts}}</p>
-                        
+                            
                     </div>
-
                 </div>
+               
+         
            
         </div>
     
@@ -62,14 +80,28 @@
        </div><!--column1-->
              
             <div class="col-md-4">
-                <div id="recoDecorator" class="container">
-                    <p id="postsHeadings">Your recommendations</p>
-                 <span id="buttonlinks" class="label label-info tags">Yash</span>
-                    <span id="buttonlinks" class="label label-info tags">Rohan</span>
-                    <span id="buttonlinks" class="label label-info tags">Amit</span>
-                    
-                </div>
-            </div>
+                
+                    <div id="recoDecorator" class="container">
+                        <p id="postsHeadings">Someone you might be interested in!</p>
+                     <span id="buttonlinks" class="label label-info tags">Yash</span>
+                        <span id="buttonlinks" class="label label-info tags">Rohan</span>
+                        <span id="buttonlinks" class="label label-info tags">Amit</span>
+
+                    </div>
+
+                    <div class="container" style="margin-top:5%"></div>
+
+                    <div id="recoDecorator" class="container">
+                        <p id="postsHeadings">Something worth looking into!</p>
+                     <span id="buttonlinks" class="label label-info tags">Dell</span>
+                        <span id="buttonlinks" class="label label-info tags">Oracle</span>
+                        <span id="buttonlinks" class="label label-info tags">Sony</span>
+
+                    </div>
+                
+            </div><!--Col-->
+             
+             
              
         </div><!--row-->
     </div><!--container-->

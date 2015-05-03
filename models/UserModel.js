@@ -2,6 +2,8 @@ var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
+var Post = new Schema({ status : {type: String}});
+
 var user = new Schema({UserId:Number, 
 					   FirstName:String, 
 					   LastName:String, 
@@ -10,6 +12,7 @@ var user = new Schema({UserId:Number,
 					   ZipCode: Number,
 					   Bio: String,
 					   Email:String,
+                       Posts : [Post],
 					   Company:{
 				   		  Name:String,
 				   		  Title:String, 

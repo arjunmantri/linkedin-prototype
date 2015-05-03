@@ -232,9 +232,10 @@ function saveUSerRegData(user, fn){
     var us = new UserModel;
     
     us.UserId = user.userId;
-    us.Firstname = user.firstname;
-    us.Lastname = user.lastname;
+    us.FirstName = user.firstname;
+    us.LastName = user.lastname;
     us.Email = user.email;
+    //us.Posts =  user.firstname + " " + user.lastname +" created new profile";
     
       console.log("############## " + user +  " " + user.userId + " " + user.firstname);
     
