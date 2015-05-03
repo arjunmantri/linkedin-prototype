@@ -31,7 +31,17 @@ body { padding-top: 70px; }
     padding: 20px;
     border-radius: 4px;
     box-shadow: 0 0 6px #ccc;
-    width: 60%;
+    width: 90%;
+    background-color: #FFFFFF;
+    margin-left: 0.5em;
+}
+
+#recoDecorator{
+    border: 1px #92CCF0 solid;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 6px #ccc;
+    width: 100%;
     background-color: #FFFFFF;
     margin-left: 0.5em;
 }
