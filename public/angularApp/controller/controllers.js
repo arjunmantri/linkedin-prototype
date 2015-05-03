@@ -130,7 +130,16 @@ app.controller('CompanyProfileController',function($scope,$http){
     }
 })
 
-app.controller('NavbarController', function ($scope, $rootScope, $location) {
+app.controller('NavbarController', function ($scope, $location,searchService) {
+	init();
+	function init(){
+		console.log("In navbar controller");
+	}
+	
+	$scope.search=function(){
+		console.log("Search key is " +$scope.searchKey);
+		searchService.setSearchKey($scope.searchKey);
+	}
     $scope.getClass = function (path) {
         if ($location.path().substr(0, path.length) == path) {
             return true;
@@ -138,18 +147,30 @@ app.controller('NavbarController', function ($scope, $rootScope, $location) {
             return false;
         }
     }
-    $rootScope.key = $scope.key;
-    console.log("Key in navbar is "+ $rootScope.key);
 });
 
-app.controller('SearchController', function ($scope, $http,$rootScope){
+
+app.controller('SearchController', function ($scope, $http,searchService){
 	init();
 	function init(){
-		console.log("Root scope key is "+$rootScope.key)
-	$http.get('/getJobs/?param1='+"Java").success(function(response){
-		console.log("In search controller " + response);
-		$scope.posts = response;
-	})
+		//searchService.setUserSearch($scope.searchkey);
+//		console.log("Root scope key is "+$scope.searchkey)
+	//$http.get('/getJobs/?param1='+"Java").success(function(response){
+		//console.log("In search controller " + response);
+		//$scope.posts = response;
+		//$scope.results = searchService.user();
+	}
+	$scope.search=function(){
+		console.log("Search key is " +$scope.searchKey);
+		$http.get("/userSearch/"+$scope.searchKey).success(function(response){
+			alert("success");
+			$scope.results=response;	
+		})
+		
+	$scope.follow=function(){
+			console.log($scope.email)
+			//$http.put("/followUser",$scope.user.)
+		}
 	}
 })
 

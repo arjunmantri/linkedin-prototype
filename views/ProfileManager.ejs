@@ -32,18 +32,21 @@
   <body id="main" style="padding-top:70px">
       
      <!--NAVIGATION CONTROLS-->
-          <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+          <div class="navbar navbar-default navbar-fixed-top navbar-inverse" data-ng-controller="NavbarController">
      
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">IN</a>
                 <!--<img src="connectme.png" class="pull-left" id="brandimg"/>-->
                 <form class="navbar-form navbar-left" role="search" id="searchbar">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Jobs, People">
+                    <form ng-submit="search()">
+    					<input type="text" ng-model="searchKey" class="form-control" placeholder="Jobs, People"> 
+    					
+    					<input type="submit" onClick="location.href='#/search'" value="Search">
+  					</form>                     
                     </div>
-                        <a href="#/search" class="glyphicon glyphicon-search"><strong>Search</strong></a>
                 </form>
-                    <ul class="nav nav-pills pull-right" data-ng-controller="NavbarController">
+                    <ul class="nav nav-pills pull-right" >
 					<li data-ng-class="{'active':getClass('/home')}"><a href="#/home">Home</a></li>
                     <li data-ng-class="{'active':getClass('/personalprofile')}"><a href="#/personalprofile">Profile</a></li>
                            <li><a href="/logout" class="glyphicon glyphicon-log-out">Logout</a></li>

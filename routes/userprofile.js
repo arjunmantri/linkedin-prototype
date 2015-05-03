@@ -150,3 +150,12 @@ exports.getJobPosts = function(req,res){
 			  }
 			});
 };
+
+exports.getUsers=function(req,res){
+	console.log("Search key "+req.params.searchKey);
+	UserModel.find({"FirstName":req.params.searchKey},function(err,response){
+		
+		res.json(response);
+	});
+	
+}
