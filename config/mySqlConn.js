@@ -16,7 +16,7 @@ var pool  = mysql_pool.createPool({
 
 	host     : 'localhost',
 	user     : 'root',
-	password : 'root',
+	password : '',
 	port     : '3306',
 	database : 'users',
 	connectionLimit : '10'

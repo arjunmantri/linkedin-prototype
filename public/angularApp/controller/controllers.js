@@ -16,6 +16,12 @@ app.controller('UserController', function ($scope,$rootScope, $http, userService
     	$http.get("/getJobPosts").success(function(response){
     		$scope.jobposts=response;
     	})
+    	$http.get("/userRecommendation").success(function(response){
+			$scope.userRecommendations = response;
+		})
+		$http.get("/jobRecommendation").success(function(response){
+			$scope.jobRecommendations = response;
+		})
     }
 
     $scope.saveInfo = function () {
@@ -55,9 +61,10 @@ app.controller('UserController', function ($scope,$rootScope, $http, userService
         });
     };
 
-    $scope.deleteCustomer = function (id) {
-        customersService.deleteCustomer(id);
-    };
+    $scope.getUserRecommendations= function(){
+    	
+    }
+    
 });
 
 app.controller('ProfileController', function ($scope,$http, userService){

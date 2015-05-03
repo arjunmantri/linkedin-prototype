@@ -9,6 +9,7 @@ var job = require('../routes/jobrecommendation.js');
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var userrecommendation = require('../routes/userrecommendation.js');
 
 router.use(function(req, res, next){
 
@@ -193,6 +194,7 @@ router.get('/userSearch/:searchKey',user.getUsers);
 //Getting Job Recommendations for a member.
 router.get('/jobRecommendation',job.getJobRecommendation);
 router.post('/jobRecommendation',job.postJobRecommendation);
+router.get('/userRecommendation',userrecommendation.getUserRecommendation);
 
 //Posting Job recommendation
 
@@ -202,6 +204,8 @@ router.post('/jobRecommendation',job.postJobRecommendation);
 //router.get('/getCompanies/:key',company.getCompanies);
 
 router.put('/followUser',user.follow);
+
+//router.get('/recommendationProfile',user.getRecommendProfile);
 
 /*=========== HELPER FUNCTIONS ===========================*/
 

@@ -1,15 +1,15 @@
-var jobrecommendation = require('../models/jobRecommendationModel');
+var UserRecommendationModel = require('../models/UserRecommendationModel');
 var	UserModel = require('../models/UserModel');
-exports.getJobRecommendation = function(req, res){
+exports.getUserRecommendation = function(req, res){
 	var user = [];
 		//console.log("******************************** User id "+req.user.serId);
-		jobrecommendation.findOne({"UserId" : 1},function(err, data){
+	UserRecommendationModel.findOne({"Email" : "yashoswal990@gmail.com"},function(err, response){
 			
 			if(err)
 				console.log("ERROR " + err);
 			
-			var userRecommendArray = response.JobPosts;
-			if(companyFollowedArray!=null){	
+			var userRecommendArray = response.Users;
+			if(userRecommendArray!=null){	
 			async.each(userRecommendArray,
 						
 					function(email,callback){
@@ -28,7 +28,7 @@ exports.getJobRecommendation = function(req, res){
 		});
 }
 
-exports.postJobRecommendation = function(req,res){
+exports.postUserRecommendation = function(req,res){
 	var jr = new jobrecommendation;
 	var jobarray = ['1','2','3'];
 	jr.UserId = 2;

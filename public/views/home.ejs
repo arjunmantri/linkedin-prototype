@@ -64,9 +64,8 @@
             <div class="col-md-4">
                 <div id="recoDecorator" class="container">
                     <p id="postsHeadings">Your recommendations</p>
-                 <span id="buttonlinks" class="label label-info tags">Yash</span>
-                    <span id="buttonlinks" class="label label-info tags">Rohan</span>
-                    <span id="buttonlinks" class="label label-info tags">Amit</span>
+                    <div data-ng-repeat="user in userRecommendations track by user._id">
+                 <span id="buttonlinks" class="label label-info tags">{{user.FirstName}}</span>
                     
                 </div>
             </div>
