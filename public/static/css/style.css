@@ -18,6 +18,17 @@ body { padding-top: 70px; }
     float: left;
 }
 
+#statusbox{
+    
+    width: 400px;
+    height: 80px;
+    border: 1px solid;
+    border-color: rgb(187, 205, 213);
+    border-collapse: collapse;
+    border-radius: 1px;
+}
+
+
 
 #postsHeadings{
     font-size: 28px; 
@@ -41,7 +52,7 @@ body { padding-top: 70px; }
     padding: 20px;
     border-radius: 4px;
     box-shadow: 0 0 6px #ccc;
-    width: 100%;
+    width: 120%;
     background-color: #FFFFFF;
     margin-left: 0.5em;
 }

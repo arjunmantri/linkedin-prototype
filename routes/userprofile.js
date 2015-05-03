@@ -47,6 +47,9 @@ exports.postProfile = function(req,response){
 		um.Education.Grade = req.body.Grade;
 		um.Education.StartDate = req.body.EducationStartDate;
 		um.Education.EndDate = req.body.EducationEndDate;
+        
+       // um.Posts = req.body.FirstName + " " + req.body.LastName + " updated profile";
+        
 		um.save(function(err){
 			if(err)
 				throw err;
@@ -160,13 +163,51 @@ exports.getUsers=function(req,res){
 	
 }
 
+
+exports.updateUserStatus = function(req, res)
+{
+    
+    console.log("Status :"  + req.body.status);
+   
+    UserModel.findOne({"UserId" : req.user.userId}, function(err, user){
+        
+        console.log(JSON.stringify(user));
+        
+        if(err)
+            console.log("User not found error " + err);
+        
+        if(user.Posts === undefined)
+        {
+            var Posts = req.body.status;
+           
+            user.Posts = Posts;     
+        }
+        
+        else{
+            user.Posts.push({status : req.body.status});
+        }
+        
+        user.save(function(err, response){
+            
+            if(err)
+                console.log("Status post error: " + err);
+            
+            console.log(response);
+            res.json({message : JSON.stringify(response)});
+        });
+        
+    });
+}
+
+
 exports.follow=function(req,res){
 		UserModel.findOne({"UserId":req.user.userId},function(err,response){
 			//console.log("************************ +" +req.body.EmailId);
 			var array = response.UserFollowed
 			//var id = Number(req.body.EmailId)
-			array.push(req.body.Id);
-			response.UserFollowed = array;
+			//array.push(req.body.Id);
+			//response.UserFollowed = array;
+            response.UserFollowed.addToSet(req.body.Id);
 			response.save(function(err){
 				if(err)
 					throw err;

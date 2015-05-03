@@ -143,6 +143,8 @@ router.get('/userProfile',user.getProfile);
 //save profile info for users
 router.post('/userProfile',user.postProfile);
 
+//update user status
+router.post('/status', user.updateUserStatus);
 
 
 /*company dashboard routes*/
