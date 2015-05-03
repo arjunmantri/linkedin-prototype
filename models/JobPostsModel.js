@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var textSearch = require('mongoose-text-search');
 
 var jobPost = new Schema({
 			_id: String,
@@ -13,5 +14,8 @@ var jobPost = new Schema({
 	    	PostDate:{type:Date},
 	    	ExpiryDate:{type:Date}
 			});
+
+jobPost.plugin(textSearch);
+jobPost.index({JobDescription :'text'});
 
 module.exports = mongoose.model("JobPosts",jobPost);

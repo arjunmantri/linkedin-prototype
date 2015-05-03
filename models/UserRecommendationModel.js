@@ -6,4 +6,4 @@ var UserRecommendation = new Schema({
 	Users:[{type:String}]
 });
 
-module.exports = mongoose.model("job",jobrecommendation);
+module.exports = mongoose.model("UserRecommendation",UserRecommendation);

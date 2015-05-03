@@ -12,7 +12,7 @@ var user = new Schema({UserId:Number,
 					   ZipCode: Number,
 					   Bio: String,
 					   Email:String,
-                       Posts : [Post],
+                       Posts : [{type:String}],
 					   Company:{
 				   		  Name:String,
 				   		  Title:String, 
@@ -31,7 +31,8 @@ var user = new Schema({UserId:Number,
 						  },
 					  Posts:String,
 					  UserFollowed:[Number],
-					  CompanyFollowed:[Number]
+					  CompanyFollowed:[Number],
+					  JobsApplied:[Number]
 					  });
 
 module.exports = mongoose.model("UserProfile", user);

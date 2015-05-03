@@ -191,6 +191,8 @@ router.get('/getMemcache/:key',memcache.getFromMemcache);
 
 
 router.get('/userSearch/:searchKey',user.getUsers);
+router.get('/companySearch/:searchKey',company.getCompanies);
+router.get('/jobSearch/:searchKey',company.getJobsSearch);
 
 
 //Getting Job Recommendations for a member.
@@ -206,6 +208,8 @@ router.get('/userRecommendation',userrecommendation.getUserRecommendation);
 //router.get('/getCompanies/:key',company.getCompanies);
 
 router.put('/followUser',user.follow);
+router.put('/followCompany',user.followCompany);
+//router.put('/applyJob',user.applyJob);
 
 //router.get('/recommendationProfile',user.getRecommendProfile);
 

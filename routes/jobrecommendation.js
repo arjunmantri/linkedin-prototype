@@ -1,5 +1,6 @@
 var jobrecommendation = require('../models/jobRecommendationModel');
 var	UserModel = require('../models/UserModel');
+//var JobPosts = require('../models/')
 exports.getJobRecommendation = function(req, res){
 	var user = [];
 		//console.log("******************************** User id "+req.user.serId);
@@ -7,13 +8,14 @@ exports.getJobRecommendation = function(req, res){
 			
 			if(err)
 				console.log("ERROR " + err);
+			res.json(data);
+			/*if(response.JobPosts!=null){
+			var jobRecommendArray = response.JobPosts;
 			
-			var userRecommendArray = response.JobPosts;
-			if(companyFollowedArray!=null){	
-			async.each(userRecommendArray,
+			async.each(jobRecommendArray,
 						
 					function(email,callback){
-						UserModel.findOne({"Email" : email}, function(err, response) {
+				jobrecommendation.findOne({"UserId" : email}, function(err, response) {
 						users.push(response);
 						callback();
 						});
@@ -25,7 +27,8 @@ exports.getJobRecommendation = function(req, res){
 					else{
 						res.json("empty array");
 					}
-		});
+		});*/
+})
 }
 
 exports.postJobRecommendation = function(req,res){

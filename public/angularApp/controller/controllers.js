@@ -17,7 +17,9 @@ app.controller('UserController', function ($scope,$rootScope, $http, userService
     		$scope.jobposts=response;
     	})
     	$http.get("/userRecommendation").success(function(response){
+    		if(response!=null){
 			$scope.userRecommendations = response;
+    		}
 		})
 		$http.get("/jobRecommendation").success(function(response){
 			$scope.jobRecommendations = response;
@@ -74,7 +76,7 @@ app.controller('UserController', function ($scope,$rootScope, $http, userService
                 console.log("Status post req err " + error);
         })
         }//if
-        
+        else{ }
         
     }//updateMyStatus
     
@@ -169,22 +171,40 @@ app.controller('SearchController', function ($scope, $http,$routeParams,searchSe
 	function init(){
 		console.log("Search key is " +$routeParams.searchKey);
 		$http.get("/userSearch/"+$routeParams.searchKey).success(function(response){
-			//alert("success");
-			$scope.results=response;	
+			//alert(response);
+			$scope.results = response;	
+		})
+		
+		$http.get("/companySearch/"+$routeParams.searchKey).success(function(response){
+			//alert(response);
+			console.log("/companySearch/ "+response);
+			$scope.companies = response;	
+		})
+		
+		$http.get("/jobSearch/"+$routeParams.searchKey).success(function(response){
+			//alert("response");
+			console.log("/jobSearch/ " + response)
+			$scope.job = response;	
 		})
 	}
-	//$scope.search=function(){
-		
-		
+	
 	$scope.follow=function(id){
-			//$scope.results=""
-			
-			$http.put("/followUser",({"Id":id})
-			).success(function(response){
-				alert("success")
-				//scope.results=""
+		$http.put("/followUser",({"Id":id})).success(function(response){
+			alert("success")
+			$scope.results=""
 			});
 		}
+	$scope.followCompany=function(id){
+		$http.put("/followCompany",({"Id":id})).success(function(response){
+			alert("success");
+			$scope.results=""
+		});
+	}
+	$scope.apply=function(id){
+		$http.put("/applyJob",({"Id":id})).success(function(response){
+			alert("success")})
+			$scope.results=""
+	}
 	
 })
 

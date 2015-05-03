@@ -2,7 +2,7 @@
  <div>
 
   <div>
-    Results:
+    Users:
       <div ng-repeat="user in results">
          {{user.FirstName+' ' +user.LastName}}
         	<div ng-model="email"> {{user.Email}}</div>
@@ -10,5 +10,24 @@
       </div>
     
   </div>
-
+   <div>
+    Companies:
+      <div ng-repeat="company in companies">
+         {{company.CompanyName}}
+        	<div ng-model="companyname">{{company.Overview}}</div>
+         <button ng-click="followCompany(company._id)">Follow</button>
+      </div>
+    
+  </div>
+   <div>
+    Jobs:
+      <div ng-model="job">
+         {{job}}
+        	<div> {{job.JobDescription}}</div>
+         <button ng-click="apply(job._id)">Apply</button>
+      </div>
+    
+  </div>
+  
+  
 </div>

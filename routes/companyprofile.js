@@ -1,6 +1,7 @@
 CompanyProfile = require('../models/CompanyModel');
 JobPosts = require('../models/JobPostsModel');
 var async = require('async');
+var inspect = require('util').inspect;
 
 exports.getCompanyProfile = function(req, res){
 
@@ -194,4 +195,23 @@ exports.getStatus = function(req, res){
         console.log("Status response: " + response);
         res.json(response.status);
     });
+}
+
+exports.getCompanies = function(req, res){
+		console.log("In company Search key "+req.params.searchKey);
+		CompanyProfile.find({"CompanyName":req.params.searchKey},function(err,response){		
+			if(err)
+				console.log(err);
+			console.log("****************** getCompanies "+response);
+			res.json(response);
+		});		
+}
+
+exports.getJobsSearch = function(req, res){
+	console.log("In job Search key "+req.params.searchKey);
+	JobPosts.textSearch(req.params.searchKey,function(err,response){
+		var result = (inspect(response, { depth: null }));
+		console.log(result);
+		res.json(result);
+	});		
 }

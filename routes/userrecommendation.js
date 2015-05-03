@@ -7,9 +7,9 @@ exports.getUserRecommendation = function(req, res){
 			
 			if(err)
 				console.log("ERROR " + err);
-			
+			if(response!=null){
 			var userRecommendArray = response.Users;
-			if(userRecommendArray!=null){	
+			
 			async.each(userRecommendArray,
 						
 					function(email,callback){
@@ -23,7 +23,7 @@ exports.getUserRecommendation = function(req, res){
 					}
 					)}
 					else{
-						res.json("empty array");
+						res.json("");
 					}
 		});
 }
