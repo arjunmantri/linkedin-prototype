@@ -63,6 +63,7 @@ app.controller('UserController', function ($scope,$rootScope, $http, userService
             $http.post('/status', ({"status" : $scope.status})).success(function(response){
             
                 console.log("Status post req complete " + response);
+                $scope.status = "";
             
         }).error(function(error){
         

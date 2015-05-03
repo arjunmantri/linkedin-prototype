@@ -1,13 +1,19 @@
 
  <div>
 
-  <div>
-    Results:
-      <div ng-repeat="user in results">
+  <div class="container">
+    
+      <div class="row" id="postsDecorator">
+          <p id="postsHeadings">Results</p>     
+      <div ng-repeat="user in results" id="searchResults" class="col-md-4">
          {{user.FirstName+' ' +user.LastName}}
         	<div ng-model="email"> {{user.Email}}</div>
          <button ng-click="follow(user.UserId)">Follow</button>
-      </div>
+      </div><!--col-->
+        <div class="col-md-4">
+            
+        </div>
+    </div>      <!--row-->
     
   </div>
 

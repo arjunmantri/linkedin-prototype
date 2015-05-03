@@ -1,8 +1,9 @@
 var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
 
-var Post = new Schema({ status : {type: String}});
+var Post = new Schema({ status : {  type: String, required: true, trim: true  } });
 
 var user = new Schema({UserId:Number, 
 					   FirstName:String, 
@@ -12,7 +13,7 @@ var user = new Schema({UserId:Number,
 					   ZipCode: Number,
 					   Bio: String,
 					   Email:String,
-                       Posts : [Post],
+                       Posts:[ ],
 					   Company:{
 				   		  Name:String,
 				   		  Title:String, 

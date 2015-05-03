@@ -43,6 +43,13 @@ function validatePassword(password, userpassword) {
 //to register a new user
 var registerNewUser =  function (req, res, next)
 {
+    if(req.body.password === undefined || req.body.password === null || req.body.password == "")
+    {
+        req.flash('message', 'Password cannot be blank');
+        res.redirect('/');
+    }
+    else
+    {
     var email = req.body.email;
     //securely hash the password before storing in DB
     var password = generateHash(req.body.password);
@@ -125,6 +132,7 @@ var registerNewUser =  function (req, res, next)
 
     });
     
+  }//validation else
 }//registernewuser
 
 
@@ -229,13 +237,21 @@ function findCompanyById(companyid, fn)
 
 function saveUSerRegData(user, fn){
     
-    var us = new UserModel;
+
+    var person_data = {
+        UserId : user.userId,
+        FirstName: user.firstname,
+        LastName : user.lastname,
+        Email: user.email
+    };
     
+    var us = new UserModel;
     us.UserId = user.userId;
-    us.FirstName = user.firstname;
-    us.LastName = user.lastname;
-    us.Email = user.email;
-    //us.Posts =  user.firstname + " " + user.lastname +" created new profile";
+    us.FirstName= user.firstname;
+      us.LastName = user.lastname;
+        us.Email= user.email;
+      
+    
     
       console.log("############## " + user +  " " + user.userId + " " + user.firstname);
     

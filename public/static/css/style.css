@@ -8,6 +8,16 @@ body { padding-top: 70px; }
     margin-left: 25%;
 }
 
+#searchResults{
+  border: 1px #1D1D22 solid;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px #ccc;
+  width: 30%;
+  background-color: #FFFFFF;
+  margin-left: 0.5em;   
+}
+
 #content{
     border: 1px #92CCF0 solid;
     padding: 20px;

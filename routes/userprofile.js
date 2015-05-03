@@ -21,9 +21,10 @@ exports.viewProfile = function(req,res){
 
 };
 exports.postProfile = function(req,response){
-	//var update
 	
-   // var um = new UserModel;
+    var query = {"UserId": req.user.userId};
+    var update = { $addToSet : { 'Posts' : req.body.FirstName + " " + req.body.LastName + " updated profile."}};
+    
 	console.log("*************** user id "+req.user.userId);
     UserModel.findOne({"UserId": req.user.userId}, function(err,um){
 		if(err)
@@ -53,26 +54,30 @@ exports.postProfile = function(req,response){
 		um.save(function(err){
 			if(err)
 				throw err;
-			console.log("user profile added : " + um);
+			
+            console.log("user profile added : " + um);
+                
+            UserModel.update(query, update, function(err, data){
+                if(err)
+                    console.log("Error updating profile update status");
+                
+            })
+            
 		});
 		//res.json(response);
 	});
     console.log("********************************** in post profile");
-    
-    
-	 
-	
-	/*um.save(function(err){
-		if(err)
-			throw err;
-		console.log("user profile added : " + um);
-	});*/		
+    		
 	response.end("Profile Saved!!");
 		
 };
 
+
 exports.getUserFollowing = function(req,res){
 	var users = [];
+
+   // var users = { firstname : String, lastname: String, email: String, posts:[]};
+    
 	UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
 		if (err)
 			console.log(err);
@@ -169,16 +174,33 @@ exports.updateUserStatus = function(req, res)
     
     console.log("Status :"  + req.body.status);
    
-    UserModel.findOne({"UserId" : req.user.userId}, function(err, user){
+    var query = {"UserId" : req.user.userId};
+    var update  = { $addToSet : { 'Posts' : req.body.status } };
+    
+    UserModel.update(query, update, function(err, data){
+        
+        if(err)
+            console.log("Update error: " + err);
+        
+        console.log("Updated " + JSON.stringify(data));
+        res.json({message : JSON.stringify(data)});
+    });
+    
+    
+ /*   UserModel.findOne({"UserId" : req.user.userId}, function(err, user){
         
         console.log(JSON.stringify(user));
         
         if(err)
             console.log("User not found error " + err);
         
+        
+        
+         user.Posts.push({status : req.body.status});
+        
         if(user.Posts === undefined)
         {
-            var Posts = req.body.status;
+            var Posts = {status : req.body.status};
            
             user.Posts = Posts;     
         }
@@ -196,7 +218,7 @@ exports.updateUserStatus = function(req, res)
             res.json({message : JSON.stringify(response)});
         });
         
-    });
+    });*/
 }
 
 
