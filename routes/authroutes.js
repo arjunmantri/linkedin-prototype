@@ -5,11 +5,10 @@ var user = require('../routes/userprofile.js');
 var company = require('../routes/companyprofile.js');
 var routes = require('../routes/index.js');
 var memcache = require('../routes/memcache.js');
+var job = require('../routes/jobrecommendation.js');
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-
-
 
 router.use(function(req, res, next){
 
@@ -186,6 +185,12 @@ router.get('/company/status', company.getStatus);
 router.get('/getJobs/:key',company.getJobPosts);
 
 router.get('/getMemcache/:key',memcache.getFromMemcache);
+
+
+//Getting Job Recommendations for a member.
+router.get('/getJobRecommendation',job.getJobRecommendation)
+
+//Posting Job recommendation
 
 //router.get('/getUsers/:key',user.getUsers);
 
