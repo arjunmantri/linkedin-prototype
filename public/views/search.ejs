@@ -1,1 +1,18 @@
-In search
+
+ <div>
+  <form ng-submit="search()">
+    <input type="text" ng-model="searchKey"> 
+    <input type="submit" value="Search">
+  </form>
+
+  <div>
+    Results:
+      <div ng-repeat="user in results">
+         {{user.FirstName+' ' +user.LastName}}
+        	<div ng-model="email"> {{user.Email}}</div>
+         <button ng-click="follow()">Follow</button>
+      </div>
+    
+  </div>
+
+</div>

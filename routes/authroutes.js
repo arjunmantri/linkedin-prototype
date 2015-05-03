@@ -187,7 +187,7 @@ router.get('/getJobs/:key',company.getJobPosts);
 
 router.get('/getMemcache/:key',memcache.getFromMemcache);
 
-//router.get('/getUsers/:key',user.getUsers);
+router.get('/userSearch/:searchKey',user.getUsers);
 
 //router.get('/getCompanies/:key',company.getCompanies);
 

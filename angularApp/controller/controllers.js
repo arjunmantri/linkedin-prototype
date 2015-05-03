@@ -74,7 +74,10 @@ app.controller('ProfileController', function ($scope,$http, userService){
 });
 
 
-app.controller('NavbarController', function ($scope, $location) {
+app.controller('NavbarController', function ($scope, $location,searchService) {
+	$scope.search(){
+		setSearchKey($scope.searchKey);
+	}
     $scope.getClass = function (path) {
         if ($location.path().substr(0, path.length) == path) {
             return true;
