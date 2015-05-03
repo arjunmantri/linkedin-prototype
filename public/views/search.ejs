@@ -1,11 +1,12 @@
 
  <div>
-
   <div class="container">
     
       <div class="row" id="postsDecorator">
           <p id="postsHeadings">Results</p>     
       <div ng-repeat="user in results" id="searchResults" class="col-md-4">
+  <div>
+    Users:
          {{user.FirstName+' ' +user.LastName}}
         	<div ng-model="email"> {{user.Email}}</div>
          <button ng-click="follow(user.UserId)">Follow</button>
@@ -16,5 +17,24 @@
     </div>      <!--row-->
     
   </div>
-
+   <div>
+    Companies:
+      <div ng-repeat="company in companies">
+         {{company.CompanyName}}
+        	<div ng-model="companyname">{{company.Overview}}</div>
+         <button ng-click="followCompany(company._id)">Follow</button>
+      </div>
+    
+  </div>
+   <div>
+    Jobs:
+      <div ng-model="job">
+         {{job}}
+        	<div> {{job.JobDescription}}</div>
+         <button ng-click="apply(job._id)">Apply</button>
+      </div>
+    
+  </div>
+  
+  
 </div>

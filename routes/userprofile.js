@@ -82,17 +82,20 @@ exports.getUserFollowing = function(req,res){
 		if (err)
 			console.log(err);
 		var userFollowedArray = response.UserFollowed;
+		if(userFollowedArray!=null){
 		async.each(userFollowedArray,
 				function(id,callback){
 				UserModel.findOne({"UserId" : id},'UserId FirstName LastName Posts', function(err, response) {
 					users.push(response);
 					callback();
 				});
-		},
+			},
 		function(err){
 			res.json(users);
-		}
-	);
+			}
+		);
+	 }
+		else{res.text("empty string");}
 	});
 }
 
@@ -102,15 +105,17 @@ exports.getCompanyFollowing = function(req,res){
 	UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
 		if (err)
 			console.log(err);
+		console.log("##############################  getCompanyFollowing " + response)
 		var companyFollowedArray = response.CompanyFollowed;
 		async.each(companyFollowedArray,
 				function(id,callback){
-					CompanyModel.findOne({"CompanyId" : id},'CompanyId CompanyName', function(err, response) {
+					CompanyModel.findOne({"_id" : id},'CompanyId CompanyName', function(err, response) {
 					companies.push(response);
 					callback();
 					});
 				},
 				function(err){
+					console.log("***************************  getCompanyFollowing final answer " + companies)
 					res.json(companies);
 				}
 				);
@@ -128,7 +133,7 @@ exports.getJobPosts = function(req,res){
 		if(companyFollowedArray!=null){
 			async.each(companyFollowedArray,
 				function(id,callback){
-					CompanyModel.findOne({"CompanyId" : id}, function(err, resp) {
+					CompanyModel.findOne({"_id" : id}, function(err, resp) {
 						if(resp!=null){
 							if(resp.JobPosts!=null){
 								postArray.push(resp.JobPosts);
@@ -201,7 +206,7 @@ exports.updateUserStatus = function(req, res)
         if(user.Posts === undefined)
         {
             var Posts = {status : req.body.status};
-           
+
             user.Posts = Posts;     
         }
         
@@ -222,7 +227,7 @@ exports.updateUserStatus = function(req, res)
 }
 
 
-exports.follow=function(req,res){
+exports.follow = function(req,res){
 		UserModel.findOne({"UserId":req.user.userId},function(err,response){
 			//console.log("************************ +" +req.body.EmailId);
 			var array = response.UserFollowed
@@ -240,3 +245,42 @@ exports.follow=function(req,res){
 		})
 	
 }
+
+exports.followCompany = function(req,res){
+	UserModel.findOne({"UserId":req.user.userId},function(err,response){
+		//console.log("************************ +" +req.body.EmailId);
+		//var array = response.CompanyFollowed
+		//var id = Number(req.body.EmailId)
+		//array.push(req.body.Id);
+		//response.UserFollowed = array;
+        response.CompanyFollowed.addToSet(req.body.Id);
+		response.save(function(err){
+			if(err)
+				throw err;
+			console.log("company followed updated : " + response);
+		});
+		res.json("success");
+
+	})
+	
+exports.applyJob = function(req,res){
+	UserModel.findOne({"UserId":req.user.userId},function(err,response){
+			//console.log("************************ +" +req.body.EmailId);
+			//var array = response.JobsApplied
+			//var id = Number(req.body.EmailId)
+			//array.push(req.body.Id);
+			//response.UserFollowed = array;
+            response.JobsApplied.addToSet(req.body.Id);
+			response.save(function(err){
+				if(err)
+					throw err;
+				console.log("user followed updated : " + response);
+			});
+			res.json("success");
+	
+		})
+	
+	}
+
+}
+

@@ -81,29 +81,25 @@
        </div><!--column1-->
              
             <div class="col-md-4">
-                
-                    <div id="recoDecorator" class="container">
-                        <p id="postsHeadings">Someone you might be interested in!</p>
-                     <span id="buttonlinks" class="label label-info tags">Yash</span>
-                        <span id="buttonlinks" class="label label-info tags">Rohan</span>
-                        <span id="buttonlinks" class="label label-info tags">Amit</span>
+                <div id="recoDecorator" class="container">
+                    <p id="postsHeadings">Your recommendations</p>
+                    <div data-ng-repeat="user in userRecommendations track by user.Email">
+                 <span id="buttonlinks" class="label label-info tags">{{user.FirstName}}</span>
+                    
+                </div>
+            </div>
+              
+            <div class="container" style="margin-top:5%"></div>
+
+                 <div id="recoDecorator" class="container">
+                     <p id="postsHeadings">Something worth looking into!</p>
+                     <div data-ng-repeat="jobpost in jobpost track by user._id">
+                     <span id="buttonlinks" class="label label-info tags">{{jobpost.JobTitle}}</span>
+                     
 
                     </div>
-
-                    <div class="container" style="margin-top:5%"></div>
-
-                    <div id="recoDecorator" class="container">
-                        <p id="postsHeadings">Something worth looking into!</p>
-                     <span id="buttonlinks" class="label label-info tags">Dell</span>
-                        <span id="buttonlinks" class="label label-info tags">Oracle</span>
-                        <span id="buttonlinks" class="label label-info tags">Sony</span>
-
-                    </div>
                 
-            </div><!--Col-->
-             
-             
-             
+            </div><!--Col-->            
         </div><!--row-->
     </div><!--container-->
 </div><!-- views/home.ejs -->
