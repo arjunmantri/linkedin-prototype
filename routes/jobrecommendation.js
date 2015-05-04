@@ -14,15 +14,15 @@ exports.getJobRecommendation = function(req, res){
 			var jobRecommendArray = data.JobPosts;			
 			async.each(jobRecommendArray,						
 					function(id,callback){
-				console.log("################################# "+ id);
+				//console.log("################################# "+ id);
 				JobPostsModel.findOne({"_id" : id}, function(err, response) {
-					console.log("^^^^^^^^^^^^^^^^^^^^^^ "+response)
+					//console.log("^^^^^^^^^^^^^^^^^^^^^^ "+response)
 						jobs.push(response);
 						callback();
 						});
 					},
 					function(err){
-						console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ "+jobs);
+						//console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ "+jobs);
 						res.json(jobs);
 					}
 					)}

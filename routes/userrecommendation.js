@@ -4,7 +4,7 @@ var async = require("async");
 exports.getUserRecommendation = function(req, res){
 	var users = [];
 		
-	UserRecommendationModel.findOne({"UserId" : req.user.userId},function(err, response){
+	UserRecommendationModel.findOne({"_id" : req.user.email},function(err, response){
 			
 			if(err)
 				console.log("ERROR " + err);
