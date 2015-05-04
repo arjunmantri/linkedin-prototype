@@ -2,15 +2,12 @@
 
 <div class="home views">
     <div class="container">
-    	<div>
-    		<br />
+    	         		
         
+        <div class="row">
             
-             <div class="container"> 
-                 
-                
-    		
-    			<div class="posts" data-ng-repeat="post in posts track by post._id" id="postsDecorator">
+            <div class="col-md-6">
+    			<div class="posts" data-ng-repeat="post in posts track by post._id" id="jobpostsDecorator">
     
 
                     <p id="postsHeadings">{{post.JobName}}</p>
@@ -33,14 +30,12 @@
                     <p id="jobpostelement">Applications accepted untill</p>
                     <p id="jobpostcontent">{{post.ExpiryDate}}</p>
                     
-
-                </div>
+                    <div style="margin-top : 2em"></div>
+                </div><!--posts-->
                 
-                 
-            </div>
-                    
-                </div>
-    		</div>
-    	</div>
-    </div>
-</div>
+          </div>
+            
+         </div><!--row-->
+      </div><!--container-->
+</div>    	
+

@@ -15,7 +15,8 @@ body { padding-top: 70px; }
   box-shadow: 0 0 6px #ccc;
   width: 30%;
   background-color: #FFFFFF;
-  margin-left: 0.5em;   
+  margin-left: 2em;   
+    margin-bottom: 2em;
 }
 
 #content{
@@ -88,9 +89,21 @@ body { padding-top: 70px; }
 {
     font-weight: 700;
     font-size: small;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 
 }
+
+#jobpostsDecorator{
+    border: 1px #92CCF0 solid;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 6px #ccc;
+    width: 120%;
+    background-color: #FFFFFF;
+    margin-left: 0.5em;
+    margin-bottom: 2em;
+}
+
 
 
 #jobpostcontent

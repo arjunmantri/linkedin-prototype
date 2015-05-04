@@ -295,7 +295,7 @@ var passportAuth = function(passport){
         {
             console.log('@@@@@@@@@@@@@@@@@@@@@@ Serializing company ' + user);
                          
-            done(null, {'company' : user.companyId})
+            done(null, {'company' : user.companyId, 'companyname':user.companyname});
         }
         
     });

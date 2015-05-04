@@ -19,7 +19,7 @@
          <div class="container" style="margin-top:3%"></div>       
                 
                 
-        <div class="container" id="postsDecorator">
+      <!-- <div class="container" id="postsDecorator">
                 <p id="postsHeadings">Posts</p>
                 <br />
               
@@ -34,7 +34,25 @@
                
          
            
-        </div>
+        </div>-->
+             
+              <div class="container" id="postsDecorator">
+                <p id="postsHeadings">Posts</p>
+                <br />
+              
+                <div>
+                    <div class="panel" data-ng-repeat="user in users track by user.UserId" id="postscontent">
+                        <p id="poststext">{{user.FirstName + ' ' + user.LastName}}</p>
+                        
+                        <div ng-repeat="post in user.posts track by $index">
+                            <span id="poststext">{{post.status}}</span>
+                        </div>
+                        
+                        <br />
+                            
+                    </div>
+                </div>
+            </div>
     
              <div class="container" style="margin-top:1%"></div>
 

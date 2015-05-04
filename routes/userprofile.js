@@ -74,11 +74,13 @@ exports.postProfile = function(req,response){
 
 
 exports.getUserFollowing = function(req,res){
-	var users = [];
 
-   // var users = { firstname : String, lastname: String, email: String, posts:[]};
+    console.log("in getUserFollowing");
     
-	UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
+ 
+    var users = [];
+    
+	/*UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
 		if (err)
 			console.log(err);
 		var userFollowedArray = response.UserFollowed;
@@ -96,7 +98,54 @@ exports.getUserFollowing = function(req,res){
 		);
 	 }
 		else{res.text("empty string");}
+	});*/
+    
+    UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
+		if (err)
+			console.log(err);
+        
+       
+		var userFollowedArray = response.UserFollowed;
+		if(userFollowedArray!=null){
+		async.each(userFollowedArray,
+				function(id,callback){
+				UserModel.findOne({"UserId" : id},'UserId FirstName LastName Posts',                                function(err, response) {
+					
+                      var UserData = { UserId: String, FirstName : String, LastName: String, Email: String, posts:[]};
+    
+                    
+                    console.log("Getting user followed: " + JSON.stringify(response));
+                    
+                    UserData.UserId = response.UserId;
+                    UserData.FirstName = response.FirstName;
+                    UserData.LastName = response.LastName;
+                    UserData.Email = response.email;
+                   // UserData.posts.push({'status' : "Hello"});
+                   // UserData.posts.push({'status': "Good morning"});
+                    
+                    var postsArray = response.Posts.split(",");
+                    
+                    for(var i=0; i<postsArray.length; i++)
+                    {
+                        UserData.posts.push({'status' : postsArray[i]});
+                    }
+                    
+                    users.push(UserData);
+                    
+                    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$ STEP3 " + JSON.stringify(users));
+                    
+                    callback();
+				});//findOne
+			},
+		function(err){
+			res.json(users);
+			}
+		);
+	 }
+		else{res.text("empty string");}
 	});
+    
+    
 }
 
 exports.getCompanyFollowing = function(req,res){
@@ -226,20 +275,28 @@ exports.updateUserStatus = function(req, res)
 
 
 exports.follow = function(req,res){
-		UserModel.findOne({"UserId":req.user.userId},function(err,response){
-			//console.log("************************ +" +req.body.EmailId);
-			var array = response.UserFollowed
-			//var id = Number(req.body.EmailId)
-			//array.push(req.body.Id);
-			//response.UserFollowed = array;
-            response.UserFollowed.addToSet(req.body.Id);
+		
+
+        UserModel.findOne({"UserId":req.user.userId},function(err,response){
+			
+			if(err)
+                res.json({"error" : "Error in following : " + err});
+            
+            console.log("Following now :" + req.body.Id);
+            
+            var array = response.UserFollowed
+			response.UserFollowed.addToSet(req.body.Id);
 			response.save(function(err){
 				if(err)
+                    res.json({"error" : "Error in following : " + err});
+                     res.redirect('/');
 					throw err;
 				console.log("user followed updated : " + response);
+                
+                //res.json({"success": "Followed"});
+                res.redirect('/');
 			});
-			res.json("success");
-	
+			
 		})
 	
 }
