@@ -76,12 +76,16 @@ exports.jobPosts = function(req,res){
 	var h = date.toString();
 	console.log(h);
 	jp._id = h;
+    jp.CompanyId = req.user.companyId;
+    jp.CompanyName = req.user.companyname;
+    jp.KeyWords = req.user.KeyWords;
 	jp.JobName = req.body.JobTitle;
 	jp.JobDescription = req.body.JobDescription;
 	jp.PostDate = new Date;
 	jp.ExpiryDate = new Date(req.body.ExpiryDate);
 	jp.JobLocation = req.body.JobLocation;
 	jp.SkillSet = req.body.SkillSet;
+    
 	
     jp.save(function(err){
 		if(err)

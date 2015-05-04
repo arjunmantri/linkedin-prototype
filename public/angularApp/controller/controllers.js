@@ -190,10 +190,16 @@ app.controller('SearchController', function ($scope, $http,$routeParams,searchSe
 	}
 	
 	$scope.follow=function(id){
-		$http.put("/followUser",({"Id":id})).success(function(response){
-			alert("success")
-			$scope.results=""
-			});
+		$http.put("/followUser",({"Id":id}))
+            .success(function(response){
+                alert("success")
+                $scope.results="";
+                window.location('/home');
+			})
+            .error(function(error){
+            
+                window.location('/home');
+            });
 		}
 	$scope.followCompany=function(id){
 		$http.put("/followCompany",({"Id":id})).success(function(response){
