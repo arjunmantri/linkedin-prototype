@@ -199,6 +199,7 @@ router.get('/jobSearch/:searchKey',company.getJobsSearch);
 router.get('/jobRecommendation',job.getJobRecommendation);
 router.post('/jobRecommendation',job.postJobRecommendation);
 router.get('/userRecommendation',userrecommendation.getUserRecommendation);
+router.post('/userRecommendation',userrecommendation.postUserRecommendation);
 
 //Posting Job recommendation
 

@@ -104,8 +104,7 @@ exports.getCompanyFollowing = function(req,res){
 	var companies = [];
 	UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
 		if (err)
-			console.log(err);
-		console.log("##############################  getCompanyFollowing " + response)
+			console.log(err);	
 		var companyFollowedArray = response.CompanyFollowed;
 		async.each(companyFollowedArray,
 				function(id,callback){
@@ -115,7 +114,6 @@ exports.getCompanyFollowing = function(req,res){
 					});
 				},
 				function(err){
-					console.log("***************************  getCompanyFollowing final answer " + companies)
 					res.json(companies);
 				}
 				);

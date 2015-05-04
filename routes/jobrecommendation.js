@@ -1,35 +1,37 @@
 var jobrecommendation = require('../models/jobRecommendationModel');
 var	UserModel = require('../models/UserModel');
+var JobPostsModel = require('../models/JobPostsModel');
+var async = require("async");
 //var JobPosts = require('../models/')
 exports.getJobRecommendation = function(req, res){
-	var user = [];
+	var jobs = [];
 		//console.log("******************************** User id "+req.user.serId);
 		jobrecommendation.findOne({"UserId" : 1},function(err, data){
-			
+			console.log("********************* " +data)
 			if(err)
 				console.log("ERROR " + err);
-			res.json(data);
-			/*if(response.JobPosts!=null){
-			var jobRecommendArray = response.JobPosts;
-			
-			async.each(jobRecommendArray,
-						
-					function(email,callback){
-				jobrecommendation.findOne({"UserId" : email}, function(err, response) {
-						users.push(response);
+			if(data.JobPosts!=null){
+			var jobRecommendArray = data.JobPosts;			
+			async.each(jobRecommendArray,						
+					function(id,callback){
+				console.log("################################# "+ id);
+				JobPostsModel.findOne({"_id" : id}, function(err, response) {
+					console.log("^^^^^^^^^^^^^^^^^^^^^^ "+response)
+						jobs.push(response);
 						callback();
 						});
 					},
 					function(err){
-						res.json(users);
+						console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ "+jobs);
+						res.json(jobs);
 					}
 					)}
 					else{
-						res.json("empty array");
+						res.json("empty:array");
 					}
-		});*/
-})
+		});
 }
+
 
 exports.postJobRecommendation = function(req,res){
 	var jr = new jobrecommendation;

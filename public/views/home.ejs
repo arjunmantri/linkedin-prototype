@@ -24,7 +24,7 @@
                 <br />
               
                 <div>
-                    <div class="panel" data-ng-repeat="user in users track by user.UserId" id="postscontent">
+                    <div class="panel" data-ng-repeat="user in users track by $index" id="postscontent">
                         <p id="poststext">{{user.FirstName + ' ' + user.LastName}}</p>
                         <p id="poststext">{{user.Posts}}</p>
                         <br />
@@ -41,7 +41,7 @@
         <div class="container" id="postsDecorator">
             <p id="postsHeadings">Users following</p>
             
-                <div data-ng-repeat="user in users track by user.UserId" >
+                <div data-ng-repeat="user in users track by $index" >
                     <a href="#/profile/{{user.UserId}}"><span id="buttonlinks" class="label label-info tags">{{user.FirstName + ' ' + user.LastName}}</span>
                     </a>
                     
@@ -55,7 +55,7 @@
          <div class="container" id="postsDecorator">
             <p id="postsHeadings">Companies following</p>
             
-                <div data-ng-repeat="company in companies track by company.CompanyId" >
+                <div data-ng-repeat="company in companies track by $index" >
                     <a href="#/profile/{{company.CompanyId}}"><span id="buttonlinks" class="label label-info tags">{{company.CompanyName}}</span></a>
                 </div>
         </div>
@@ -67,7 +67,7 @@
             <p id="postsHeadings">Jobs</p>
     		
     		<div>
-    			<div data-ng-repeat="post in jobposts track by post._id" id="postscontent">
+    			<div data-ng-repeat="post in jobposts track by $index" id="postscontent">
     			{{post.CompanyName}}
     			<br />
     			{{post.JobName}}
@@ -83,7 +83,7 @@
             <div class="col-md-4">
                 <div id="recoDecorator" class="container">
                     <p id="postsHeadings">Your recommendations</p>
-                    <div data-ng-repeat="user in userRecommendations track by user.Email">
+                    <div data-ng-repeat="user in userRecommendations track by $index">
                  <span id="buttonlinks" class="label label-info tags">{{user.FirstName}}</span>
                     
                 </div>
@@ -93,8 +93,8 @@
 
                  <div id="recoDecorator" class="container">
                      <p id="postsHeadings">Something worth looking into!</p>
-                     <div data-ng-repeat="jobpost in jobpost track by user._id">
-                     <span id="buttonlinks" class="label label-info tags">{{jobpost.JobTitle}}</span>
+                     <div data-ng-repeat="jobpost in jobRecommendations track by $index">
+                     <span id="buttonlinks" class="label label-info tags">{{jobpost.JobName +' '+ jobpost.CompanyName}}</span>
                      
 
                     </div>

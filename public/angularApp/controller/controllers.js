@@ -22,6 +22,7 @@ app.controller('UserController', function ($scope,$rootScope, $http, userService
     		}
 		})
 		$http.get("/jobRecommendation").success(function(response){
+			console.log(response);
 			$scope.jobRecommendations = response;
 		})
     }
