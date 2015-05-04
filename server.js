@@ -168,10 +168,10 @@ app.use(function(err, req, res, next) {
 });
 
 
-process.on('uncaughtException', function(err){
+//process.on('uncaughtException', function(err){
     
-    console.log("ERROR LOGGED : " + err);
+   // console.log("ERROR LOGGED : " + err);
     
-})
+//})
 
 module.exports = app;

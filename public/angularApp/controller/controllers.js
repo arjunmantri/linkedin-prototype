@@ -195,7 +195,7 @@ app.controller('SearchController', function ($scope, $http,$routeParams,searchSe
             .success(function(response){
                 alert("success")
                 $scope.results="";
-                window.location('/home');
+                window.location('#/home');
 			})
             .error(function(error){
             
@@ -214,6 +214,38 @@ app.controller('SearchController', function ($scope, $http,$routeParams,searchSe
 			$scope.results=""
 	}
 	
+})
+
+app.controller('careerPathController',function ($scope, $http){
+		$scope.items = ['CEO','CFO','CIO','COO','CTO','phd','Director_of_HR','Senior_Manager','VP_of_Products',
+		                'FInance_Manager',
+		                'Product_Manager',
+		                'VP_of_Operations',
+		                'SVP_of_Innovation',
+		                'Senior_HR_Manager',
+		                'Senior_QE_Manager',
+		                'Started_a_Company',
+		                'VP_of_Engineering',
+		                'CEO_of_own_company',
+		                'Innovation_Manager',
+		                'SVP_of_Engineering',
+		                'Director_of_FInance',
+		                'Director_of_Products',
+		                'Director_of_Operations',
+		                'Director_of_Engineering']
+		var selectedItem = $scope.selectedItem;
+		$scope.showPath = function(item){
+			$http.get("/showCareerPath/"+item).success(function(response){
+				console.log(response);
+				$scope.title = response;
+			})
+			//$scope.results = {'Title':[
+			  //                         {Path1:['Software Engineer','CEO','Software Manager','CTO']},
+			    //                       {Path2:['Software Engineer','CEO','Software Manager','CTO']}
+			      //                     	]
+			        //          }
+		}
+		
 })
 
 app.controller('userRegController', ['$scope', userRegistration])

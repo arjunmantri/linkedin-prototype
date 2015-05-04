@@ -5,6 +5,8 @@ var	UserModel = require('../models/UserModel');
 var CompanyModel = require('../models/CompanyModel');
 var JobPosts = require('../models/JobPostsModel');
 
+
+
 exports.getProfile = function(req,res){
 	
 	UserModel.findOne({"UserId": req.user.userId},function(err,response){
@@ -104,7 +106,9 @@ exports.getUserFollowing = function(req,res){
 		if (err)
 			console.log(err);
         
-       
+       if(response.UserFollowed==undefined){res.json()}
+       else
+       {
 		var userFollowedArray = response.UserFollowed;
 		if(userFollowedArray!=null){
 		async.each(userFollowedArray,
@@ -143,6 +147,7 @@ exports.getUserFollowing = function(req,res){
 		);
 	 }
 		else{res.text("empty string");}
+       }
 	});
     
     
@@ -154,6 +159,9 @@ exports.getCompanyFollowing = function(req,res){
 	UserModel.findOne({"UserId" : req.user.userId}, function(err, response) {
 		if (err)
 			console.log(err);	
+		if(response==null){res.json("")}
+		else
+		{
 		var companyFollowedArray = response.CompanyFollowed;
 		async.each(companyFollowedArray,
 				function(id,callback){
@@ -166,6 +174,7 @@ exports.getCompanyFollowing = function(req,res){
 					res.json(companies);
 				}
 				);
+		}
 			});
 }
 
@@ -219,7 +228,6 @@ exports.getUsers=function(req,res){
 	});
 	
 }
-
 
 exports.updateUserStatus = function(req, res)
 {
@@ -299,7 +307,7 @@ exports.follow = function(req,res){
 			
 		})
 	
-}
+};
 
 exports.followCompany = function(req,res){
 	UserModel.findOne({"UserId":req.user.userId},function(err,response){
@@ -317,6 +325,7 @@ exports.followCompany = function(req,res){
 		res.json("success");
 
 	})
+};
 	
 exports.applyJob = function(req,res){
 	UserModel.findOne({"UserId":req.user.userId},function(err,response){
@@ -335,7 +344,34 @@ exports.applyJob = function(req,res){
 	
 		})
 	
-	}
-
-}
+	};
+	
+ exports.getCareerPath = function(req,res){
+	 var MongoClient =require("mongodb");
+	 console.log("in getCareerPath");
+	 MongoClient.connect(
+				'mongodb://ds031902.mongolab.com:31902/cmpe282prjt',
+				function(err, db) {
+					console.log("inside connect");
+					if (err) {
+						console.log("Error_____" + err);
+						throw err;
+					}
+					
+					db.authenticate("sambu8865", "9may1989", function(err, rows) {
+						  if(!err){
+							  var collection = db.collection('collection333');
+							 
+							  collection.findOne({position: req.params.key},function(err, doc) {
+									console.log("Doc_____" + doc);
+									//if (doc != null) {
+										//careerData = JSON.parse(JSON.stringify(doc));
+										console.log(doc);
+										res.json(doc);
+							  		//}
+								});
+						  }
+					});	
+				});
+ };
 

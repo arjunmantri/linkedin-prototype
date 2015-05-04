@@ -46,5 +46,10 @@ app.config(function ($routeProvider) {
         		controller:'SearchController',
         		templateUrl:'/views/search.ejs'
         	})
+        .when('/careerPath',
+        		{
+        			controller:'careerPathController',
+        			templateUrl:'/views/careerPath.ejs'
+        		})
         .otherwise({ redirectTo: '/home' });
 });

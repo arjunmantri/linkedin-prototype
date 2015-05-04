@@ -214,6 +214,8 @@ router.put('/followCompany',user.followCompany);
 
 //router.get('/recommendationProfile',user.getRecommendProfile);
 
+router.get('/showCareerPath/:key',user.getCareerPath);
+
 /*=========== HELPER FUNCTIONS ===========================*/
 
 

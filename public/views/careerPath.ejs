@@ -1,0 +1,24 @@
+<h1>Career Graph</h1>
+<div class="container">
+	<div>
+	<h3>Select your Expected Title</h3>
+	 <select ng-model="selectedItem">
+        <option ng-repeat="item in items" value="{{item}}">{{item}}</option>
+      </select>
+	<button ng-click='showPath(selectedItem)'>Show Path</button>
+	</div>
+	
+	
+		<span ng-model = "title">
+		<h4>Path1:</h4>
+			<span ng-repeat = "position in title.path1 track by $index">
+			 -> {{position}} 
+		</span>
+		<div>
+		<h4>Path2:</h4>
+		<span ng-repeat = "position in title.path2 track by $index">
+		
+			 ->{{position}} 
+		</span>
+		</div>
+	</div>
